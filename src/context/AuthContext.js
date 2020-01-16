@@ -20,6 +20,11 @@ const authReducer = (state, action) => {
                 token: action.payload,
                 errorMessage: ''
             }
+        case 'signout':
+            return {
+                token: null,
+                errorMessage: ''
+            }
         default:
             break;
     }
@@ -69,13 +74,20 @@ const signin = (dispatch) => async ({ email, password }) => {
     }
 }
 
-const signout = (dispatch) => {
-    return ({ email, password }) => {
+const signout = (dispatch) => async () => {
         // make api request
         // if we sign up, modify state to say we are signed out
         // if signing up fails, error message
+        // remove token
+        // update state
+        // navigate to auth
 
-    }
+    await AsyncStorage.removeItem('token')
+
+    dispatch({
+        type: 'signout',
+    })
+    navigate('loginFlow')
 }
 
 // checks for token already existing in storage before sending to loginFlow
