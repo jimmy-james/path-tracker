@@ -1,3 +1,6 @@
+/**
+ * For files that are not React components
+ */
 import { NavigationActions } from 'react-navigation'
 
 let navigator;
