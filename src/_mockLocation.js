@@ -16,6 +16,7 @@ const getLocation = increment => {
             accuracy: 5,
             altitude: 5,
             altitudeAccuracy: 5,
+            // may need to change these to real location if on physical device to test
             longitude: -122.0312186 + increment * tenMetersWithDegrees,
             latitude: 37.33233141 + increment * tenMetersWithDegrees
         }
