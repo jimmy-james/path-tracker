@@ -41,9 +41,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
     },
-    button: {
-        marginTop: 20
-    },
     errorMessage: {
         fontSize: 16,
         color: 'red'
