@@ -31,12 +31,19 @@ export default (shouldTrack, callback) => {
             startWatching()
         } else {
             // stop watching
-            console.log(subscriber)
             subscriber.remove()
             setSubscriber(null)
         }
+
+        // Cleanup: to be careful, we don't want to keep calling/keep telling watchPositionAsync to create new instantiations of the watcher in case it or any other function we use will do that.
+        return () => {
+            if (subscriber) {
+                subscriber.remove()
+            }
+        }
         // we want to run the callback in useEffect anytime the second argument's value [shouldTrack] ever changes
-    }, [shouldTrack])
+        // callback changes when useCallback hook creates a new callback
+    }, [shouldTrack, callback])
 
     return [err]
 }

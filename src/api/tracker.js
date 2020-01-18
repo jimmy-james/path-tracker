@@ -4,5 +4,5 @@ export default axios.create({
     // use ngrok so phone or emulator can access the express server
     // ngrok exposes the server's port to our local computer for access.
     // it only lasts for 8 hours
-    baseURL: 'http://4ea08fb7.ngrok.io'
+    baseURL: 'http://996ffaca.ngrok.io'
 })
