@@ -10,16 +10,16 @@ import { Context as LocationContext } from '../context/LocationContext'
 import useLocation from '../hooks/useLocation'
 
 const TrackCreateScreen = ({ isFocused }) => {
-    const { state, addLocation } = useContext(LocationContext)
+    const { state: { recording }, addLocation } = useContext(LocationContext)
     // useCallback will invoke the same first callback that was used on the first rendering.
     // that is unless passed in second arg changes: state.recording.
     // this change will cause useCallback to invoke the latest callback as a new callback...
     // this will trigger useLocation's useEffect hook to trigger invocation because it's second param (callback) will have changed in memory.
     const callback = useCallback(
         location => {
-            addLocation(location, state.recording)
+            addLocation(location || recording, recording)
         },
-        [state.recording],
+        [recording],
     )
     // may also write useLocation(addLocation)
     const [ err ] = useLocation(isFocused, callback)
