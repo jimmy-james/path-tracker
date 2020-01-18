@@ -16,7 +16,22 @@ import { Provider as AuthProvider } from './src/context/AuthContext'
 import { Provider as LocationProvider } from './src/context/LocationContext'
 import { Provider as TrackProvider } from './src/context/TrackContext'
 
+import { FontAwesome } from '@expo/vector-icons'
+
 import { setNavigator } from './src/navigationRef'
+
+// had to extract this to add navigationOptions
+const trackListFlow = createStackNavigator({
+  TrackList: TrackListScreen,
+  TrackDetail: TrackDetailScreen,
+})
+
+trackListFlow.navigationOptions = () => {
+  return {
+    title: 'Tracks',
+    tabBarIcon: <FontAwesome name="th-list" size={20} />
+  }
+}
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -25,10 +40,7 @@ const switchNavigator = createSwitchNavigator({
     Signin: SigninScreen
   }),
   mainFlow: createBottomTabNavigator({
-    trackListFlow: createStackNavigator({
-      TrackList: TrackListScreen,
-      TrackDetail: TrackDetailScreen,
-    }),
+    trackListFlow,
     TrackCreate: TrackCreateScreen,
     Account: AccountScreen,
   })

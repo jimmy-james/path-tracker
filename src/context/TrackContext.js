@@ -1,15 +1,10 @@
 import createDataContext from './createDataContext'
+import trackerApi from '../api/tracker'
 
 const trackReducer = (state, action) => {
     switch (action.type) {
         case 'fetch_tracks':
-            return {
-                ...state
-            }
-        case 'create_track':
-            return {
-                ...state
-            }
+            return action.payload
 
         default:
             return state
@@ -17,10 +12,17 @@ const trackReducer = (state, action) => {
 }
 
 // actions
-const fetchTracks = dispatch => () => {}
+const fetchTracks = dispatch => async () => {
+    const response = await trackerApi.get('/tracks')
+    dispatch({
+        type: 'fetch_tracks',
+        payload: response.data,
+    })
+}
 
-const createTrack = dispatch => (name, locations) => {
-    console.log(name, locations)
+const createTrack = dispatch => async (name, locations) => {
+    const response = await trackerApi.post('/tracks', { name, locations })
+    console.log("RES ", response)
 }
 
 const deleteTrack = () => {}
